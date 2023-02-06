@@ -101,6 +101,9 @@ namespace ProjectHaufe
 
             ApplyInjuriesToTable();
             UpdateSaveButtonState();
+            UpdateLoadedTablesDropdown();
+
+            Table.SaveTables();
         }
 
         private void ApplyInjuriesToTable()
@@ -119,7 +122,11 @@ namespace ProjectHaufe
         public void OnDeletePressed()
         {
             if (Table.Loaded.Remove(m_loadedTable.TableName)) {
-                //Save file
+                Table.SaveTables();
+            }
+
+            if(Table.Loaded.Count == 0) {
+                Table.AddExampleTable();
             }
 
             UpdateLoadedTablesDropdown();

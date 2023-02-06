@@ -85,7 +85,7 @@ namespace ProjectHaufe
                 return 0;
             }
 
-            intVal = Mathf.Clamp(intVal, 0, SelectedTable.Ailments.Count);
+            intVal = Mathf.Clamp(intVal, 1, SelectedTable.Ailments.Count);
 
             return intVal;
         }

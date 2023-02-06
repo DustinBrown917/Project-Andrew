@@ -73,7 +73,9 @@ namespace ProjectHaufe
                 m_stringBuilder.Append(", ");
             }
 
-            m_stringBuilder.Remove(m_stringBuilder.Length - 2, 2);
+            if(m_stringBuilder.Length > 0) {
+                m_stringBuilder.Remove(m_stringBuilder.Length - 2, 2);
+            }
 
             m_itemsText.text = m_stringBuilder.ToString();
             m_stringBuilder.Clear();

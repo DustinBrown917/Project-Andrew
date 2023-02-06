@@ -34,7 +34,6 @@ namespace ProjectHaufe
         {
             CreateNewOption();
             TableSelectionField tsf = m_options[0];
-            tsf.RefreshTables(); 
             tsf.SetDeleteButtonInteractable(false);
         }
 
@@ -47,6 +46,12 @@ namespace ProjectHaufe
             tsf.onCancelButtonPressed += DeleteOption;
             onOptionsChanged?.Invoke(this, tsf, Operation.Added);
             m_addButtonContainer.transform.SetAsLastSibling();
+
+            if(m_options.Count > 1) {
+                for(int i = 0; i < m_options.Count; i++) {
+                    m_options[i].SetDeleteButtonInteractable(true);
+                }
+            }
         }
 
         public void DeleteOption(TableSelectionField tsf)
@@ -57,6 +62,17 @@ namespace ProjectHaufe
             if (m_options.Remove(tsf)) {
                 Destroy(tsf.gameObject);
                 onOptionsChanged?.Invoke(this, tsf, Operation.Removed);
+            }
+
+            if(m_options.Count == 1) {
+                m_options[0].SetDeleteButtonInteractable(false);
+            }
+        }
+
+        public void RefreshAllOption()
+        {
+            for(int i = 0; i < m_options.Count; i++) {
+                m_options[i].RefreshTables();
             }
         }
     } 
